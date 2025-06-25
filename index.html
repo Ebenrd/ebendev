@@ -1,0 +1,43 @@
+<body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs>
+        <a-marker preset="hiro" id="hiro-marker">
+            <!-- Model Naruto -->
+            <a-entity 
+                gltf-model="url(model/naruto_uzumaki_running_animation.glb)" 
+                scale="0.5 0.5 0.5" 
+                position="-0.5 0 0"
+                rotation="0 180 0"
+                animation-mixer="clip: mixamo.com; loop: repeat; crossFadeDuration: 1">
+            </a-entity>
+
+            <!-- Model Kakashi -->
+            <a-entity 
+                gltf-model="url(model/kakashi.glb)" 
+                scale="0.5 0.5 0.5" 
+                position="0.5 0 0"
+                rotation="0 180 0"
+                animation-mixer="clip: Idle; loop: repeat; crossFadeDuration: 1">
+            </a-entity>
+
+            <!-- Suara Naruto -->
+            <a-sound id="naruto_alive" src="url(model/naruto_alive.mp3)" autoplay="false" loop="true"></a-sound>
+        </a-marker>
+
+        <!-- Kamera -->
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <!-- Script untuk play dan stop sound -->
+    <script>
+        var marker = document.querySelector('#hiro-marker');
+        var sound = document.querySelector('#naruto_alive');
+
+        marker.addEventListener('markerFound', function () {
+            sound.components.sound.playSound();
+        });
+
+        marker.addEventListener('markerLost', function () {
+            sound.components.sound.stopSound();
+        });
+    </script>
+</body>
